@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+        <script src="resources/js/jquery.min.js" type="text/javascript"></script>
+        <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="resources/js/plotly-latest.min.js" type="text/javascript"></script>
+
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6hdTj3MDvEf2SkHA2zQbdFGgvABWqmn0&amp;libraries=places"></script>
+        <link href="resources/css/googleMap.css" rel="stylesheet" type="text/css"/>
+        <script src="resources/js/googleMap.js" type="text/javascript"></script>
+        <style>
+
+            body { padding-top: 70px;  
+            }
+            #navbarimagelogo{margin-top: -5px;}
+            .container *
+            {
+                /*border: 1px black solid;*/
+            }
+            #map
+            {
+                height: 500px;
+            }
+            .panel-heading a:after {
+                font-family:'Glyphicons Halflings';
+                content:"\e114";
+                float: right;
+                color: grey;
+            }
+            .panel-heading a.collapsed:after {
+                content:"\e080";
+            }
+            .scrollable
+            {
+                height: 500px;
+                max-height: 500px;
+                overflow-y:scroll; 
+            }
+            .list-group-horizontal .list-group-item {
+                display: inline-block;
+            }
+            .list-group-horizontal .list-group-item {
+                margin-bottom: 0;
+                margin-left:-4px;
+                margin-right: 0;
+            }
+            .list-group-horizontal .list-group-item:first-child {
+                border-top-right-radius:0;
+                border-bottom-left-radius:4px;
+            }
+            .list-group-horizontal .list-group-item:last-child {
+                border-top-right-radius:4px;
+                border-bottom-left-radius:0;
+            }
+            .sameWidht33Percent a
+            {
+                width: 33%;
+            }
+            .dataSetSelector
+            {
+                height: 300px;
+            }
+            .dataSetSelector a
+            {
+                text-align: center;
+                line-height: 2.5;
+                height: 20%;
+                font-weight: bold;
+            }
+            .main-svg
+            {
+                background: none !important;
+            }
+        </style>
+    </head>
+    <body>
+        <!--     top menu        -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <!--header-->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.xhtml">
+                        <img src="resources/img/logo.png" alt="logo" height="30" id="navbarimagelogo"/>
+                    </a>
+                </div>
+                <!--items-->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8"> 
+                    <ul class="nav navbar-nav"> 
+                        <li class="active">
+                            <a href="#">Home</a>
+                        </li> 
+                        <li>
+                            <a href="#">Link</a>
+                        </li> 
+                        <li>
+                            <a href="#">Link</a>
+                        </li> 
+                    </ul> 
+                </div>
+            </div>
+        </nav> 
+        <!--main section-->
+        <div class="container">
+            <!--first row-->
+            <!--map|info-->
+            <div class="row">
+                <!--map col-->
+                <div class="col-md-7">
+                    <div id="map"></div>
+                </div>
+                <!--info col-->
+                <div class="col-md-5 scrollable">
+                    <div class="panel-group" id="accordion">
+                        <!--collapsible 1 -->
+                        <div class="panel panel-default" id="panel1">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-target="#collapseOne" 
+                                       href="#collapseOne">
+                                        Collapsible Group Item #1
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" id="panel2">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-target="#collapseTwo" 
+                                       href="#collapseTwo" class="collapsed">
+                                        Collapsible Group Item #2
+                                    </a>
+                                </h4>
+
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse">
+                                <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" id="panel3">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-target="#collapseThree"
+                                       href="#collapseThree" class="collapsed">
+                                        Collapsible Group Item #3
+                                    </a>
+                                </h4>
+
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse">
+                                <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br/>
+            <!--row 2 charts-->
+            <div class="row" style="clear: both">
+                <!--data set selector col-->
+                <div class="col-md-2 dataSetSelector"  id="dataSetSelector">
+                    <div class="list-group">
+                        <a  class="list-group-item active" id="ds1">dataset 1</a>
+                        <a  class="list-group-item" id="ds1">dataset 2</a>
+                        <a  class="list-group-item" id="ds2">dataset 3</a>
+                        <a  class="list-group-item" id="ds3">dataset 4</a>
+                        <a class="list-group-item" id="ds4">dataset 5</a>
+                    </div>
+                </div>
+                <!--chart col-->
+                <div class="col-md-10">
+                    <!--chart type row-->
+                    <div class="row">
+                        <div class="list-group list-group-horizontal sameWidht33Percent" id="chartTypeSelector">
+                            <a  class="list-group-item active" id="line"> line chart</a>
+                            <a  class="list-group-item" id="bar">bar chart</a>
+                            <a  class="list-group-item" id="pie">pie chart</a>
+                        </div>
+                    </div>
+                    <!--main chart row-->
+                    <div class="row">
+                        <div id="chart" style="width:100%;height:290px;"></div>
+                    </div>
+                </div>
+            </div>
+
+    </body>
+    <script>
+        $(document).ready(function () {
+            initMap();
+            var selectedChart = "line";
+            var selectedDataSet = "ds1";
+
+            var chart = document.getElementById('chart');
+            drawChart(selectedChart, selectedDataSet, chart);
+            $("#chartTypeSelector a").click(function () {
+                selectedChart = $(this).attr("id");
+                if (!$(this).hasClass("active"))
+                {
+                    $("#chartTypeSelector a").removeClass("active");
+                    $(this).addClass("active");
+                    drawChart(selectedChart, selectedDataSet, chart);
+                }
+            });
+            $("#dataSetSelector a").click(function () {
+                selectedDataSet = $(this).attr("id");
+                if (!$(this).hasClass("active"))
+                {
+                    $("#dataSetSelector a").removeClass("active");
+                    $(this).addClass("active");
+                    drawChart(selectedChart, selectedDataSet, chart);
+                }
+            });
+        });
+        function drawChart(selectedChart, selectedDataSet, chart)
+        {
+            //here we should impl a method in backend (ajax call can be used for smooth user exprience), that get the chart type and dataset type and genereate the corresponding data
+            //eg get(selectedDataSet,selectedChartType
+            //another option is to pre generate all the possible datasets, and store them in an array
+            data = getData(selectedChart, selectedDataSet);
+            Plotly.newPlot(chart, data,
+                    {margin: {t: 0}});
+
+        }
+        function getData(selectedChart, selectedDataSet)
+        {
+            var hardCodedData = {ds1: {x: [1, 2, 3], y: [4, 5, 6], type: "line"}, ds2: {x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], y: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], type: "line"}, ds3: {x: [8, 9, 6, 3, 4], y: [8, 6, 3, 7, 8], type: "line"}};
+            var data = hardCodedData[selectedDataSet];
+            data.type = selectedChart;
+            if (selectedChart === "pie")
+            {
+                return [{values: data.y, lables: data.x, type: "pie"}];
+            }
+            return [data];
+
+        }
+    </script>
+</html>

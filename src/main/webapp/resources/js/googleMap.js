@@ -41,10 +41,7 @@ function initMap() {
     map.data.addListener('click', function (event) {
         selectSuburb(event.feature);
     });
-    var searchDiv = document.getElementById('search');
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchDiv);
-    searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'), {bounds: map.getBounds()});
-    google.maps.event.addListener(searchBox, 'places_changed', onPlaceChange);
+    
 
 }
 
@@ -55,20 +52,6 @@ function addMarker(location) {
         map: map
     });
     markers.push(marker);
-}
-//rempve all the markers and add the current one
-function update(location) {
-    debugger;
-    clearMarkers();
-    for (var i = 0; i < location.length; i++) {
-        var counter = location[i];
-        var marker = new google.maps.Marker({
-            position: counter,
-            map: map
-        });
-        markers.push(marker);
-    }
-
 }
 
 // Sets the map on all markers in the array.
